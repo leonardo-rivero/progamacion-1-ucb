@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Utilidades en JavaScript</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f9f9f9;
+    }
+    h2 {
+      color: #00477A;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    input {
+      margin: 5px;
+      padding: 5px;
+    }
+    button {
+      background: #FFCF15;
+      color: #00477A;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e6b800;
+    }
+    .resultado {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Funciones en JavaScript</h1>
+
+  <!-- Conversión de Binario -->
+  <div class="card">
+    <h2>Conversión Binario ↔ Otras bases</h2>
+    <input type="text" id="binario" placeholder="Número binario">
+    <button onclick="convertirBinario()">Convertir</button>
+    <div class="resultado">
+      Decimal: <span id="dec"></span><br>
+      Hexadecimal: <span id="hex"></span><br>
+      Octal: <span id="oct"></span>
+    </div>
+  </div>
+
+  <!-- Conversión viceversa -->
+  <div class="card">
+    <h2>Otras bases → Binario</h2>
+    Decimal: <input type="text" id="decInput">
+    <button onclick="mostrarDecABin()">Convertir</button><br>
+    Hexadecimal: <input type="text" id="hexInput">
+    <button onclick="mostrarHexABin()">Convertir</button><br>
+    Octal: <input type="text" id="octInput">
+    <button onclick="mostrarOctABin()">Convertir</button><br>
+    <div class="resultado">
+      Resultado Binario: <span id="resBin"></span>
+    </div>
+  </div>
+
+  <!-- Tabla de multiplicar -->
+  <div class="card">
+    <h2>Tabla de Multiplicar</h2>
+    <input type="number" id="numero" placeholder="Ej: 7">
+    <button onclick="tabla()">Generar</button>
+    <div id="resultado"></div>
+  </div>
+
+  <!-- Suma de pares -->
+  <div class="card">
+    <h2>Suma de Números Pares</h2>
+    <button onclick="alert('Suma pares 1-100 = ' + sumarPares100())">Sumar pares 1–100</button>
+    <button onclick="alert('Suma pares 1-50 = ' + sumarPares50())">Sumar pares 1–50</button>
+  </div>
+
+  <!-- Operaciones con binarios -->
+  <div class="card">
+    <h2>Operaciones con Binarios</h2>
+    <input type="text" id="bin1" placeholder="Primer binario">
+    <input type="text" id="bin2" placeholder="Segundo binario"><br><br>
+    <button onclick="operar('suma')">Sumar</button>
+    <button onclick="operar('resta')">Restar</button>
+    <button onclick="operar('multi')">Multiplicar</button>
+    <button onclick="operar('div')">Dividir</button>
+    <div class="resultado">Resultado: <span id="resOp"></span></div>
+  </div>
+
+  <script>
+    // ---------- Conversión de binario ----------
+    function convertirBinario() {
+      let bin = document.getElementById("binario").value;
+      let decimal = parseInt(bin, 2);
+      document.getElementById("dec").textContent = decimal;
+      document.getElementById("hex").textContent = decimal.toString(16).toUpperCase();
+      document.getElementById("oct").textContent = decimal.toString(8);
+    }
+
+    function mostrarDecABin() {
+      let dec = document.getElementById("decInput").value;
+      document.getElementById("resBin").textContent = parseInt(dec, 10).toString(2);
+    }
+    function mostrarHexABin() {
+      let hex = document.getElementById("hexInput").value;
+      document.getElementById("resBin").textContent = parseInt(hex, 16).toString(2);
+    }
+    function mostrarOctABin() {
+      let oct = document.getElementById("octInput").value;
+      document.getElementById("resBin").textContent = parseInt(oct, 8).toString(2);
+    }
+
+    // ---------- Tabla de multiplicar ----------
+    function tabla() {
+      let num = parseInt(document.getElementById("numero").value);
+      let i = 1;
+      let salida = "<h3>Tabla del " + num + ":</h3><ul>";
+      while (i <= 10) {
+        salida += "<li>" + num + " x " + i + " = " + (num * i) + "</li>";
+        i++;
+      }
+      salida += "</ul>";
+      document.getElementById("resultado").innerHTML = salida;
+    }
+
+    // ---------- Suma de pares ----------
+    function sumarPares100() {
+      let i = 1, suma = 0;
+      while (i <= 100) {
+        if (i % 2 === 0) suma += i;
+        i++;
+      }
+      return suma;
+    }
+
+    function sumarPares50() {
+      let i = 1, suma = 0;
+      while (i <= 50) {
+        if (i % 2 === 0) suma += i;
+        i++;
+      }
+      return suma;
+    }
+
+    // ---------- Operaciones con binarios ----------
+    function binToDec(bin) { return parseInt(bin, 2); }
+    function decToBin(dec) { return dec.toString(2); }
+
+    function operar(op) {
+      let b1 = document.getElementById("bin1").value;
+      let b2 = document.getElementById("bin2").value;
+      let d1 = binToDec(b1);
+      let d2 = binToDec(b2);
+      let resultado = "";
+
+      if (op === "suma") resultado = decToBin(d1 + d2);
+      if (op === "resta") resultado = decToBin(d1 - d2);
+      if (op === "multi") resultado = decToBin(d1 * d2);
+      if (op === "div") {
+        if (d2 === 0) resultado = "Error: división por 0";
+        else resultado = decToBin(Math.floor(d1 / d2));
+      }
+      document.getElementById("resOp").textContent = resultado;
+    }
+  </script>
+</body>
+</html>

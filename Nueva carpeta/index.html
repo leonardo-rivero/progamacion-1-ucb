@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visualizador de Matriz</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* estilo mínimo para que se vea bien la lista de botones */
+    .sidebar { padding: 1rem; width: 260px; box-sizing: border-box; }
+    .buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .exercise-buttons { margin-top: 0.5rem; display: grid; gap: 6px; }
+    .exercise-buttons button { width: 100%; }
+    .controls { margin-bottom: 0.6rem; }
+  </style>
+</head>
+<body>
+  <div class="container" style="display:flex; min-height:100vh;">
+    <aside class="sidebar" aria-label="Operaciones">
+      <h2>Operaciones</h2>
+
+      <div class="controls">
+        <button id="fillBtn">Llenar Aleatorio</button>
+        <button id="clearBtn">Limpiar</button>
+        <button onclick="drawMatrix()">Redibujar</button>
+      </div>
+
+      <hr />
+
+      <h3>Ejercicios (1 → 11)</h3>
+      <div class="exercise-buttons">
+        <button onclick="runExercise(1)">Ej. 1 — Cuadrado</button>
+        <button onclick="runExercise(2)">Ej. 2 — Marco interno</button>
+        <button onclick="runExercise(3)">Ej. 3 — Cruces</button>
+        <button onclick="runExercise(4)">Ej. 4 — Bordes & diagonales</button>
+        <button onclick="runExercise(5)">Ej. 5 — Bandera</button>
+        <button onclick="runExercise(6)">Ej. 6 — Alternado</button>
+        <button onclick="runExercise(7)">Ej. 7 — Zig-zag</button>
+        <button onclick="runExercise(8)">Ej. 8 — Espiral</button>
+        <button onclick="runExercise(9)">Ej. 9 — Triángulo sup. izq.</button>
+        <button onclick="runExercise(10)">Ej. 10 — Triángulo inf. der.</button>
+        <button onclick="runExercise(11)">Ej. 11 — Cuadrícula</button>
+      </div>
+
+      <hr />
+
+      <div style="margin-top:0.6rem;">
+        <button onclick="window.clearMatrix && window.clearMatrix()">Limpiar (función)</button>
+        <button onclick="window.drawMatrix && window.drawMatrix()">Redibujar (función)</button>
+      </div>
+
+      <div id="status" style="margin-top:0.8rem; font-size:0.9rem;"></div>
+    </aside>
+
+    <main class="canvas-area" style="flex:1; padding:1rem;">
+      <div class="canvas-wrapper" style="height:80vh; border:1px solid #ddd;">
+        <canvas id="matrixCanvas" width="800" height="800" style="width:100%; height:100%; display:block;"></canvas>
+      </div>
+    </main>
+  </div>
+
+  <!-- Carga matrix.js primero -->
+  <script src="matrix.js"></script>
+  <!-- Si tienes app.js u otro archivo, cárgalo después -->
+  <script src="app.js"></script>
+</body>
+</html>

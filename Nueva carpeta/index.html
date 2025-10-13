@@ -6,62 +6,82 @@
   <title>Visualizador de Matriz</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* estilo mínimo para que se vea bien la lista de botones */
-    .sidebar { padding: 1rem; width: 260px; box-sizing: border-box; }
-    .buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    .exercise-buttons { margin-top: 0.5rem; display: grid; gap: 6px; }
-    .exercise-buttons button { width: 100%; }
-    .controls { margin-bottom: 0.6rem; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      display: flex;
+      height: 100vh;
+    }
+    .container {
+      display: flex;
+      width: 100%;
+    }
+    .sidebar {
+      width: 280px;
+      background: #222;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .sidebar button {
+      background: #afaa4c;
+      border: none;
+      color: white;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .sidebar button:hover {
+      background: #ec0606;
+    }
+    .canvas-area {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white;
+    }
+    canvas {
+      background: #eee;
+      border: 2px solid #333;
+    }
   </style>
 </head>
+
 <body>
-  <div class="container" style="display:flex; min-height:100vh;">
-    <aside class="sidebar" aria-label="Operaciones">
-      <h2>Operaciones</h2>
-
-      <div class="controls">
-        <button id="fillBtn">Llenar Aleatorio</button>
-        <button id="clearBtn">Limpiar</button>
-        <button onclick="drawMatrix()">Redibujar</button>
-      </div>
-
-      <hr />
-
-      <h3>Ejercicios (1 → 11)</h3>
-      <div class="exercise-buttons">
-        <button onclick="runExercise(1)">Ej. 1 — Cuadrado</button>
-        <button onclick="runExercise(2)">Ej. 2 — Marco interno</button>
-        <button onclick="runExercise(3)">Ej. 3 — Cruces</button>
-        <button onclick="runExercise(4)">Ej. 4 — Bordes & diagonales</button>
-        <button onclick="runExercise(5)">Ej. 5 — Bandera</button>
-        <button onclick="runExercise(6)">Ej. 6 — Alternado</button>
-        <button onclick="runExercise(7)">Ej. 7 — Zig-zag</button>
-        <button onclick="runExercise(8)">Ej. 8 — Espiral</button>
-        <button onclick="runExercise(9)">Ej. 9 — Triángulo sup. izq.</button>
-        <button onclick="runExercise(10)">Ej. 10 — Triángulo inf. der.</button>
-        <button onclick="runExercise(11)">Ej. 11 — Cuadrícula</button>
-      </div>
-
-      <hr />
-
-      <div style="margin-top:0.6rem;">
-        <button onclick="window.clearMatrix && window.clearMatrix()">Limpiar (función)</button>
-        <button onclick="window.drawMatrix && window.drawMatrix()">Redibujar (función)</button>
-      </div>
-
-      <div id="status" style="margin-top:0.8rem; font-size:0.9rem;"></div>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Ejercicios</h2>
+      <button onclick="ejercicio1()">Ejercicio 1: Cuadrado Relleno</button>
+      <button onclick="ejercicio2()">Ejercicio 2: Marco Interno</button>
+      <button onclick="ejercicio3()">Ejercicio 3: Cruces</button>
+      <button onclick="ejercicio4()">Ejercicio 4: Bordes y Diagonales</button>
+      <button onclick="ejercicio5()">Ejercicio 5: Bandera</button>
+      <button onclick="ejercicio6()">Ejercicio 6: Relleno Alterno</button>
+      <button onclick="ejercicio7()">Ejercicio 7: Zig-Zag Horizontal</button>
+      <button onclick="ejercicio8()">Ejercicio 8: Espiral</button>
+      <button onclick="ejercicio9()">Ejercicio 9: Triángulo Sup. Izq.</button>
+      <button onclick="ejercicio10()">Ejercicio 10: Triángulo Inf. Der.</button>
+      <button onclick="ejercicio11()">Ejercicio 11: Cuadrícula</button>
+      <hr>
+     <button onclick="limpiarMatriz()">Limpiar Matriz</button>
     </aside>
 
-    <main class="canvas-area" style="flex:1; padding:1rem;">
-      <div class="canvas-wrapper" style="height:80vh; border:1px solid #ddd;">
-        <canvas id="matrixCanvas" width="800" height="800" style="width:100%; height:100%; display:block;"></canvas>
-      </div>
+    <main class="canvas-area">
+      <canvas id="matrixCanvas" width="400" height="400"></canvas>
     </main>
   </div>
 
-  <!-- Carga matrix.js primero -->
   <script src="matrix.js"></script>
-  <!-- Si tienes app.js u otro archivo, cárgalo después -->
-  <script src="app.js"></script>
 </body>
 </html>
+}
